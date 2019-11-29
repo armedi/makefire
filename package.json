@@ -1,0 +1,25 @@
+{
+  "name": "makefire",
+  "version": "0.1.0",
+  "description": "React hooks for google cloud firestore database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "firestore"
+  ],
+  "author": "Armedi",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^7.5.0"
+  },
+  "peerDependencies": {
+    "react": "^16.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/armedi/makefire.git"
+  },
+  "homepage": "https://github.com/armedi/makefire"
+}
