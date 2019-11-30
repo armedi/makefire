@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react'
 import * as firebase from 'firebase/app'
 import "firebase/firestore";
 
+function normalizePath(path) {
+  if (path.startsWith('/')) path = path.substring(1)
+  if (path.endsWith('/')) path = path.substring(0, -1)
+  return path
+}
+
 export default function makeFire(config) {
   firebase.initializeApp(config)
   const db = firebase.firestore()
@@ -11,7 +17,7 @@ export default function makeFire(config) {
 
     useEffect(() => {
       try {
-        db.doc(path).onSnapshot(doc => {
+        return db.doc(normalizePath(path)).onSnapshot(doc => {
           setDbState({
             data: doc.data(),
             loading: false,
@@ -26,6 +32,7 @@ export default function makeFire(config) {
         })
       }
     }, [])
+
     return dbState
   }
 
@@ -34,11 +41,11 @@ export default function makeFire(config) {
 
     useEffect(() => {
       try {
-        let ref = db.collection(path)
+        let ref = db.collection(normalizePath(path))
         for (let query of queries) {
           ref = ref.where(...query)
         }
-        ref.onSnapshot(querySnapshot => {
+        return ref.onSnapshot(querySnapshot => {
           let data = []
           querySnapshot.forEach(doc => data.push(doc.data()))
           setDbState({
