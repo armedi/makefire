@@ -4,7 +4,7 @@ import "firebase/firestore";
 
 function normalizePath(path) {
   if (path.startsWith('/')) path = path.substring(1)
-  if (path.endsWith('/')) path = path.substring(0, -1)
+  if (path.endsWith('/')) path = path.substring(0, path.length - 1)
   return path
 }
 
@@ -41,7 +41,7 @@ export default function makeFire(config) {
 
     useEffect(() => {
       try {
-        let ref = db.collection(normalizePath(path))
+        let ref = db.collection(path)
         for (let query of queries) {
           ref = ref.where(...query)
         }

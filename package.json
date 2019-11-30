@@ -1,6 +1,6 @@
 {
   "name": "makefire",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React hooks for google cloud firestore database",
   "main": "index.js",
   "scripts": {
