@@ -41,7 +41,7 @@ export default class Firestore {
 
   subscribeCollection(...args) {
     const path = normalizePath(args[0])
-    const queries = args.length > 2 ? args[1] : []
+    const queries = (args.length > 2 && Array.isArray(args[1])) ? args[1] : []
     const subscriber = args[args.length - 1]
 
     let subscription = this.subscriptions[path]
@@ -49,7 +49,7 @@ export default class Firestore {
       subscription.subscribers.push(subscriber)
       subscriber(this.subscriptions[path].state)
     } else {
-      let ref = this.db.doc(path)
+      let ref = this.db.collection(path)
       for (let query of queries) {
         ref = ref.where(...query)
       }
@@ -64,13 +64,14 @@ export default class Firestore {
           querySnapshot.forEach(doc => {
             data.push(Object.assign({ id: doc.id }, doc.data()))
           })
-          this.subscriptions[path].state = data
+          const state = {
+            data,
+            loading: false,
+            error: null
+          }
+          this.subscriptions[path].state = state
           this.subscriptions[path].subscribers.forEach(subscriber => {
-            subscriber({
-              data,
-              loading: false,
-              error: null
-            })
+            subscriber(state)
           })
         }),
         subscribers: [subscriber],

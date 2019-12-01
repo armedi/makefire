@@ -5,7 +5,7 @@ import "firebase/firestore";
 import Firestore from './Firestore'
 
 
-export default function makeFire(config) {
+export default function makefire(config) {
   firebase.initializeApp(config)
   const db = new Firestore(firebase.firestore())
 
@@ -29,7 +29,7 @@ export default function makeFire(config) {
       try {
         db.subscribeCollection(path, queries, setDbState)
       } catch (error) {
-        setDbState({ data: null, loading: false, error })
+        setDbState({ data: [], loading: false, error })
       }
       return () => db.unsubscribeCollection(path, setDbState)
     }, [])
