@@ -1,13 +1,15 @@
 {
   "name": "makefire",
-  "version": "0.1.5",
+  "version": "0.2.1",
   "description": "React hooks for google cloud firestore database",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "firestore"
+    "firestore",
+    "React Hooks",
+    "Google Cloud"
   ],
   "author": "Armedi",
   "license": "MIT",

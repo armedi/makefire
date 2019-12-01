@@ -15,7 +15,7 @@ export default class Firestore {
     let subscription = this.subscriptions[path]
     if (subscription) {
       subscription.subscribers.push(subscriber)
-      subscriber(this.subscriptions[path].state)
+      subscriber(subscription.state)
     } else {
       this.subscriptions[path] = {
         state: {
@@ -47,7 +47,7 @@ export default class Firestore {
     let subscription = this.subscriptions[path]
     if (subscription) {
       subscription.subscribers.push(subscriber)
-      subscriber(this.subscriptions[path].state)
+      subscriber(subscription.state)
     } else {
       let ref = this.db.collection(path)
       for (let query of queries) {

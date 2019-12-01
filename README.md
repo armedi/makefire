@@ -37,6 +37,12 @@ Now you can use them on your components. Insert the path for the collection or d
 function CoolComponent(props) {
   // subscribing to document 'bob' in 'users' collection
   const { data, loading, error } = useDocument('users/bob')
+
+  // subscribing to 'users' collection
+  const { data, loading, error } = useCollection('users')
+
+  // subscribing to 'users' collection with additional queries
+  const { data, loading, error } = useCollection('users', [['age', '>=', 21], ['location', '==', 'Jakarta']])
   
   ...
   );
