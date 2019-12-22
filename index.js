@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react'
-import * as firebase from 'firebase/app'
-import "firebase/firestore";
 
 import Firestore from './Firestore'
 
 
-export default function makefire(config) {
-  firebase.initializeApp(config)
-  const db = new Firestore(firebase.firestore())
+export default function makefire(firestoreDb) {
+  const db = new Firestore(firestoreDb)
 
   function useDocument(path) {
     const [dbState, setDbState] = useState({ data: null, loading: true, error: null })

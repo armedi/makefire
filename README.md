@@ -12,23 +12,31 @@ This is a simple React hooks for google cloud firestore database.
 ## Installation
 
 ```bash
-npm install makefire
+npm install firebase makefire
 ```
 
 ## Usage
 
-Create `useDocument` and `useCollection` hooks with `makefire`
+Setup firebase with your app configuration and then create `useDocument` and `useCollection` hooks with `makefire`
 
 ```javascript
+import * as firebase from 'firebase/app'
+import "firebase/firestore";
 import makefire from 'makefire'
+
 
 const firebaseConfiguration = {
   apiKey: '### FIREBASE API KEY ###',
   authDomain: '### FIREBASE AUTH DOMAIN ###',
   projectId: '### CLOUD FIRESTORE PROJECT ID ###'
-});
+};
 
-const { useDocument, useCollection } = makefire(firebaseConfiguration)
+firebase.initializeApp(firebaseConfiguration)
+ 
+const db = firebase.firestore()
+
+const { useDocument, useCollection } = makefire(db)
+
 ```
 
 Now you can use them on your components. Insert the path for the collection or document in database as the first argument for the hooks.
