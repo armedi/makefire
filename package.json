@@ -1,10 +1,14 @@
 {
   "name": "makefire",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "React hooks for google cloud firestore database",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c",
+    "start": "rollup -c -w",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "firestore",
@@ -14,12 +18,21 @@
   "author": "Armedi",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^16.12.0",
-    "firebase": "^7.6.1"
+    "firebase": "^7.6.1",
+    "react": "^16.12.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/armedi/makefire.git"
   },
-  "homepage": "https://github.com/armedi/makefire"
+  "homepage": "https://github.com/armedi/makefire",
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "rollup": "^1.29.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-url": "^3.0.1"
+  }
 }
